@@ -1,0 +1,24 @@
+name: CI/CD for codetribe
+
+on:
+  push:
+    branches:
+      workflow # Replace with your branch name if different
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Build and Deploy
+      run: |
+        # Add your build commands here (if any)
+        # For a simple HTML/CSS project, you might not need this
+
+        aws s3 sync ./ s3://codetribe.com
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
